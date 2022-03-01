@@ -1,0 +1,228 @@
+html {
+    box-sizing: border-box;
+    height:100%
+  }
+  
+  *, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  
+  :root {
+    --sunrise:linear-gradient(
+      0deg,
+      hsl(0deg 100% 40%) 0%,
+      hsl(14deg 100% 42%) 11%,
+      hsl(21deg 100% 44%) 22%,
+      hsl(27deg 100% 46%) 33%,
+      hsl(32deg 100% 47%) 44%,
+      hsl(36deg 100% 48%) 56%,
+      hsl(41deg 100% 49%) 67%,
+      hsl(45deg 100% 50%) 78%,
+      hsl(50deg 100% 50%) 89%,
+      hsl(55deg 100% 50%) 100%
+    );
+    --californiaSky: linear-gradient(
+      0deg,
+      hsl(302deg 93% 94%) 0%,
+      hsl(286deg 92% 91%) 14%,
+      hsl(269deg 94% 87%) 29%,
+      hsl(253deg 95% 84%) 43%,
+      hsl(237deg 94% 81%) 57%,
+      hsl(221deg 95% 77%) 71%,
+      hsl(204deg 94% 74%) 86%,
+      hsl(188deg 95% 71%) 100%
+  );
+    --texasDawn: linear-gradient(
+      0deg,
+      hsl(202deg 100% 24%) 0%,
+      hsl(198deg 74% 25%) 11%,
+      hsl(193deg 48% 26%) 22%,
+      hsl(188deg 22% 28%) 33%,
+      hsl(188deg 15% 31%) 44%,
+      hsl(189deg 8% 35%) 56%,
+      hsl(0deg 0% 39%) 67%,
+      hsl(0deg 1% 28%) 100%
+    );
+    --white: #f8f8f8;
+    --black: hsl(0, 0%, 0%);
+    --grey: #4d4d4d; 
+    --lightgrey: #8d8d8d;
+    --transparent: transparent;
+    --blackBg: linear-gradient(
+      hsl(0deg, 0%, 0%),
+      hsl(0deg, 0%, 0%)
+    )
+  }
+  
+  .light-theme {
+    --pomodoro: var(--sunrise);
+    --shortBreak: var(--californiaSky);
+    --longBreak: var(--texasDawn);
+    --fontColor: var(--white);
+    --button: var(--transparent);
+    --buttonText: var(--white);
+    --buttonActive: var(--black);
+    --timerColor: var(--white);
+    --border: var(--white);
+    --timerBorder: var(--white)
+  }  
+  
+  .dark-theme {
+    --pomodoro: var(--black);
+    --shortBreak: var(--black);
+    --longBreak: var(--black);
+    --fontColor: var(--grey);
+    --button: var(--grey);
+    --buttonText: var(--white);
+    --buttonActive: var(--white);
+    --timerColor: var(--lightgrey);
+    --border: var(--grey);
+    --timerBorder: var(--lightgrey);
+  }  
+  
+  .switch {
+    width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .switch div {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    display: block;
+    background: #eee;
+    width: 30px;
+    border-radius: 50px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  .fa-adjust {
+    transform: rotate(180deg);
+  }
+  
+  .switch input {
+    display: none;
+  }
+  
+  .slider {
+    background-color: #999;
+    transition: 0.4s;
+    border-radius: 34px;
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  input:checked + .slider {
+    transform: translateX(8px);
+  }
+  
+  
+  body {
+    background: var(--pomodoro);
+    transition: background 1s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    user-select: none;
+    height: 100%;
+  }
+  
+  progress {
+    border-radius: 2px;
+    width: 100%;
+    height: 12px;
+    position: fixed;
+    top: 0;
+  }
+  
+  progress::-webkit-progress-bar {
+   background-color: rgba(0, 0, 0, 0.1);;
+  }
+  
+  progress::-webkit-progress-value {
+    background-color: #fff;
+  }
+  
+  .timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
+    border: 2px solid var(--timerBorder);
+    border-radius: 50px;
+  }
+  
+  .clock {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 15rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    font-family: arial, sans-serif;
+    color: var(--timerColor)
+  }
+  
+  .mode-button {
+    font-size: 16px;
+    height: 28px;
+    cursor: pointer;
+    box-shadow: none;
+    font-weight: 300;
+    color: var(--fontColor);
+    border: 1px solid transparent;
+    margin: 0px;
+    border-radius: 4px;
+    padding: 2px 12px;
+    background: none;
+  }
+  
+  .mode-button.active {
+    border-color: var(--fontColor);
+  }
+  
+  .main-button {
+    cursor: pointer;
+    /* box-shadow: rgb(235, 235, 235) 0px 6px 0px; */
+    font-size: 22px;
+    height: 55px;
+    text-transform: uppercase;
+    color: var(--buttonText);
+    font-weight: bold;
+    width: 200px;
+    background-color: var(--button);
+    border: 3px solid var(--border);
+    margin: 20px 0px 0px;
+    padding: 0px 12px;
+    border-radius: 4px;
+  }
+  
+  button:active {
+    border: .5px solid var(--buttonActive);
+  }
+  
+  .main-button.active {
+    color: var(--buttonText);
+    background-color: var(--button);
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  @media screen and (max-width: 550px) {
+    .clock {
+      font-size: 8rem;
+    }
+  }
+  
